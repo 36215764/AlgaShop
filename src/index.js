@@ -6,7 +6,7 @@ import HomeView from './views/Home.view';
 
 ReactDOM.render(
   <React.StrictMode>
-    <HomeView></HomeView>
+    <HomeView />
   </React.StrictMode>,
   document.getElementById('root')
 );
