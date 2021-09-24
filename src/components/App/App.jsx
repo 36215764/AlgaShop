@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import CheckBox from '../../shared/CheckBox';
 import LineChart from '../../shared/LineChart';
 import AppContainer from '../AppContainer';
 import AppHeader from '../AppHeader';
+import ShoppingList from '../ShoppingList/ShoppingList';
 import { Container, Wrapper } from './App.styles';
+import productsMock from '../../mocks/productsList.json'
 
 const App = () => {
-    const [lettuce, setLettuce] = useState(false)
-    const [rice, setRice] = useState(false)
-    const [percentage, setPercentage] = useState(20)
-
     const colors = ['#62CBC6', '#00ABAD', '#00858C', '#006073', '#004D61']
+    const [products, setProducts] = useState(productsMock.products)
+    const [selectedProducts, setSelectedProducts] = useState([])
 
     useEffect(() => {
-        setTimeout(() => {
-            setPercentage(80)
-        }, 5000)
-    }, [])
+        const newSelectedProducts = products
+            .filter((product) => product.checked)
+
+        setSelectedProducts(newSelectedProducts)
+    }, [products])
+
+    const handleToggle = (id) => {
+        const newProducts = products.map((product) => 
+            product.id === id 
+            ? { ...product, checked: !product.checked}
+            : product
+        );
+
+        setProducts(newProducts);
+    }
 
     return ( 
     <Wrapper>
@@ -24,15 +34,19 @@ const App = () => {
             <AppHeader />
             <AppContainer 
                 left={
-                    <div>
-                        Produtos disponiveis
-                        <CheckBox onClick={() => setLettuce(!lettuce)} title="Alface" value={lettuce}/>
-                        <CheckBox onClick={() => setRice(!rice)} title="Arroz" value={rice}/>
-                    </div>
+                    <ShoppingList 
+                        title="Produtos disponiveis"
+                        products={products}
+                        onToggle={handleToggle}
+                    />
                 }
 
                 middle={
-                    <div>Sua lista de compras</div>
+                    <ShoppingList 
+                        title="Sua lista de compras" 
+                        products={selectedProducts}
+                        onToggle={handleToggle}
+                    />
                 }
 
                 right={
@@ -42,7 +56,7 @@ const App = () => {
                         <LineChart 
                             color={colors[0]}
                             title="Saudavel"
-                            percentage={percentage}
+                            percentage={80}
                         />
                         <LineChart 
                             color={colors[1]}
