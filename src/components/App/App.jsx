@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContainer from '../AppContainer';
 import AppHeader from '../AppHeader';
 import { Container, Wrapper } from './App.styles';
 
@@ -7,7 +8,19 @@ const App = () => {
     <Wrapper>
         <Container>
             <AppHeader />
-            todo: App
+            <AppContainer 
+                left={
+                    <div style={{backgroundColor: 'red'}}>Produtos disponiveis</div>
+                }
+
+                middle={
+                    <div style={{backgroundColor: 'green'}}>Sua lista de compras</div>
+                }
+
+                right={
+                    <div style={{backgroundColor: 'blue'}}>Estatisticas</div>
+                }
+            />
         </Container>
     </Wrapper> 
     );
