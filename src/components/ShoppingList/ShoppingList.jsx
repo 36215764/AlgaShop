@@ -8,7 +8,8 @@ const ShoppingList = ({ title, products, onToggle }) => {
         <Items>
             {
                 products.map(product => 
-                    <CheckBox 
+                    <CheckBox
+                        key={product.id}
                         value={product.checked} 
                         title={product.name}
                         onClick={() => onToggle(product.id)}
