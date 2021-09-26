@@ -1,43 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import LineChart from '../../shared/LineChart';
 import AppContainer from '../AppContainer';
 import AppHeader from '../AppHeader';
-import ShoppingList from '../ShoppingList/ShoppingList';
+import ShoppingList from '../ShoppingList';
+import Calculator from '../Calculator';
 import { Container, Wrapper } from './App.styles';
-import productsMock from '../../mocks/productsList.json'
+import { selectAllProducts, selectedProductsTotalPrice, selectSelectedProducts } from '../../store/Products/Products.selectors';
 import extractPercentage from '../../utils/extractPercentage';
-import Calculator from '../Calculator/Calculator';
+import { toggleProduct } from '../../store/Products/Products.actions';
 
 const App = () => {
     const colors = ['#62CBC6', '#00ABAD', '#00858C', '#006073', '#004D61']
-    const [products, setProducts] = useState(productsMock.products)
-    const [selectedProducts, setSelectedProducts] = useState([])
-    const [totalPrice, setTotalPrice] = useState(0)
 
-    useEffect(() => {
-        const newSelectedProducts = products
-            .filter((product) => product.checked)
-
-        setSelectedProducts(newSelectedProducts)
-    }, [products])
-
-    useEffect(() => {
-        const total = selectedProducts
-            .map(product => product.price)
-            .reduce((a, b) => a + b, 0)
-
-        setTotalPrice(total)
-
-    }, [selectedProducts])
+    const dispatch = useDispatch()
+    const products = useSelector(selectAllProducts)
+    const selectedProducts = useSelector(selectSelectedProducts)
+    const totalPrice = useSelector(selectedProductsTotalPrice)
 
     const handleToggle = (id) => {
-        const newProducts = products.map((product) => 
-            product.id === id 
-            ? { ...product, checked: !product.checked}
-            : product
-        );
-
-        setProducts(newProducts);
+        dispatch(toggleProduct(id))
     }
 
     return ( 
