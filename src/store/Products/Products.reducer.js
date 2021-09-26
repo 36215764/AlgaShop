@@ -1,6 +1,6 @@
 import productsMock from '../../mocks/productsList.json'
 
-export default function (state = productsMock.products, action){
+export default function ProductsReducer(state = productsMock.products, action){
     switch (action.type) {
         case 'TOGGLE_PRODUCT':
             return state.map(product => 
