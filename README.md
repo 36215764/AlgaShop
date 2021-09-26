@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Link for view preview for this project [View Project in Heroku](https://alga-shopping-rd.herokuapp.com/).
 
 ## Available Scripts
 
