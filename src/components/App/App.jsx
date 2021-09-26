@@ -30,15 +30,14 @@ const App = () => {
                 left={
                     <ShoppingList 
                         title="Produtos disponiveis"
-                        products={products}
                         onToggle={handleToggle}
                     />
                 }
 
                 middle={
                     <ShoppingList 
-                        title="Sua lista de compras" 
-                        products={selectedProducts}
+                        title="Sua lista de compras"
+                        displayOnlySelected
                         onToggle={handleToggle}
                     />
                 }
