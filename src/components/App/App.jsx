@@ -6,6 +6,7 @@ import ShoppingList from '../ShoppingList/ShoppingList';
 import { Container, Wrapper } from './App.styles';
 import productsMock from '../../mocks/productsList.json'
 import extractPercentage from '../../utils/extractPercentage';
+import Calculator from '../Calculator/Calculator';
 
 const App = () => {
     const colors = ['#62CBC6', '#00ABAD', '#00858C', '#006073', '#004D61']
@@ -108,6 +109,8 @@ const App = () => {
                                     minimumFractionDigits: 2
                                 }) }
                             </div>
+
+                            <Calculator />
                         </div>
                     </div>
                 }
